@@ -9,92 +9,71 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ipartek.formacion.modelo.dao.impl.CategoriaDAOImpl;
-import com.ipartek.formacion.modelo.dao.impl.ProductoDAOImpl;
-import com.ipartek.formacion.modelo.pojo.Categoria;
-import com.ipartek.formacion.modelo.pojo.Producto;
+import org.apache.log4j.Logger;
+
+import com.ipartek.formacion.modelo.Fabricante;
+import com.ipartek.formacion.modelo.FormularioBusqueda;
+import com.ipartek.formacion.modelo.Producto;
+import com.ipartek.formacion.modelo.ProductoDao;
+
+
 
 /**
- * Obtiene todos los productos categorizados para listar
- * 
- * @parametro idCategoria id categoria, si es null muestra todas, else muestra productos de esa categoria
- * @parametro categoria  nombre del categotegoria
- * 
- * 
- * @atributo encabezado titulo para h3 en index.jsp
- * @atributo categoriasConProductos ArrayList<Categoria>, que contiene tambien todos los productos de cada categoria
- * 
- * @view index.jsp
- * 
+ * Servlet implementation class InicioController
  */
 @WebServlet("/inicio")
 public class InicioController extends HttpServlet {
-	
 	private static final long serialVersionUID = 1L;
-	private static final String TODAS_LAS_CATEGORIAS = "-1";	
-	
-	private static final ProductoDAOImpl productoDAO = ProductoDAOImpl.getInstance();
-	private static final CategoriaDAOImpl categoriaDAO = CategoriaDAOImpl.getInstance();
-	
-	
+	private final static Logger LOG = Logger.getLogger(InicioController.class);
+	private final static ProductoDao dao = ProductoDao.getInstance();
+   
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request, response);
+		
+		
+		String nombre = request.getParameter("nombre");
+		String pmin = request.getParameter("pmin");
+		String pmax = request.getParameter("pmax");
+		String fabricante = request.getParameter("fabricante");
+		
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+		ArrayList<Fabricante> fabricantes = new ArrayList<Fabricante>();
+		FormularioBusqueda form = new FormularioBusqueda();
+		
+		String mensaje = "";
+		
+		try {
+			LOG.trace("Entramos al controlador/inicio");
+			
+			form = new FormularioBusqueda(nombre, pmin, pmax, fabricante);
+			
+			LOG.debug(String.format("filtro busqueda nombre=%s precioMinimo=%s precioMaximo=%s idFabricante=%s", nombre, pmin, pmax, fabricante));
+			
+			productos = dao.buscar( form.getNombre(), form.getPmin(), form.getPmax(), form.getIdFabricante());
+			
+			fabricantes = dao.GetAllFabricantes();
+			
+		} catch (Exception e) {
+			LOG.error(e);
+			mensaje = "existe un error";
+		}finally {
+			
+			request.setAttribute("formulario", form);
+			request.setAttribute("productos", productos);
+			request.setAttribute("fabricantes", fabricantes);
+			request.setAttribute("mensaje", mensaje);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request, response);
+		doGet(request, response);
 	}
-	
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// parametros
-		String paramIdCategoria = ( request.getParameter("idCategoria") == null ) ? TODAS_LAS_CATEGORIAS : request.getParameter("idCategoria") ;
-		String paramCatNom =  ( request.getParameter("categoria") == null ) ? "Todas las Categorias" : request.getParameter("categoria");
-		
-		// Inicializar Atributos a retornar a la vista	
-		ArrayList<Categoria> categoriasConProductos = new ArrayList<Categoria> ();
-		String encabezado = "";
-		
-		
-		if ( TODAS_LAS_CATEGORIAS.equals(paramIdCategoria)) {		   		 // Todos los productos de todas las categorias
-		
-			//TODO ver como limitar en Java o SQL el numero de Productos 
-			categoriasConProductos = categoriaDAO.getAllWithProducts();			
-			encabezado = "Todos los Productos por Categoria";
-			
-		}else {    										                       // producto de una categoria concreta
-			
-			// obtengo los productos
-			int idCategoria = Integer.parseInt(paramIdCategoria);
-			ArrayList<Producto> productos = productoDAO.getAllByCategoria( idCategoria, 10);
-				
-			//crear Categoria para añadir los productos			
-			Categoria c = new Categoria();			 
-			c.setId(idCategoria);
-			c.setNombre(paramCatNom);			
-			c.setProductos(productos);
-			
-			// guardar en el array la categoria
-			categoriasConProductos.add(c);
-			
-			encabezado = "<b>" + productos.size() + "</b> Útimos productos de <b>" + paramCatNom + "</b>" ;
-				
-		}
-		
-		//atributos		
-		request.setAttribute("categoriasConProductos", categoriasConProductos );
-		request.setAttribute("encabezado", encabezado );
-		
-		//forward vista
-		request.getRequestDispatcher("index.jsp").forward(request, response);		
-		
-	}
-	
 
 }

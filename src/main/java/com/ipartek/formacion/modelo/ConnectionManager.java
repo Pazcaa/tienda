@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionManager {
 	
 	
-	private final static String URL = "jdbc:mysql://localhost/supermercado";
+	private final static String URL = "jdbc:mysql://localhost/uf2176_act1_paz";
 	private final static String USUARIO = "debian-sys-maint";
 	private final static String PASS = "o8lAkaNtX91xMUcV";
 	

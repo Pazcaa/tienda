@@ -1,0 +1,124 @@
+h1{
+	color: red;
+}
+body{
+	background-color: #ECEFF1;
+}
+
+main.container {
+	
+	margin-top: 6%;
+	
+}
+
+header {
+	background-color:#fff; 
+}
+
+/*****************************************************/
+
+.navbar {
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+	background-color:#fff; 
+	top: 0%;
+}
+
+.logo {
+	color: #fff;
+	background-color: #13C1AC;
+	display: block;
+	background-size: contain;
+	box-shadow: 0 2px 4px 0 rgba(37,50,56,.1);
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.form-control{
+	border-color: #13C1AC;
+	border-radius: 40px;
+}
+
+.form-name {
+	margin-right: 10px;
+}
+
+.mr-sm-2{
+	margin-left: 10px;
+}
+
+.input-group {
+    width: 500px;
+}
+
+.form-modal {
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+    
+
+/*********************************************************/
+.card-content {
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+
+.card-content .card{
+	margin: 3px;
+	font-family: Wallie,Helvetica;
+	width: 300px;
+	border-radius: 10px;
+}
+
+.img-precio {
+	padding: 10px;
+	border-radius: 14px;
+}
+
+.card-title {
+	color: #253238;
+font-size: 1rem;
+line-height: 22px;
+margin-bottom: 8px;
+	
+}
+
+.card-text {
+	color: #607D8B;
+font-size: .875rem;
+height: 85px;
+}
+
+
+.btn-outline {
+	color: #fff;
+	background-color: #13C1AC;
+	
+}
+
+.submit {
+	color: #253238;;
+	background-color: #fff;	
+	border-radius: 40px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	margin-left: 10px;
+	border: 1px solid #13C1AC;
+}
+
+.active {
+	color: #fff;
+	background-color: #13C1AC;
+	border-color:#13C1AC;
+}	
+
+
+	
+	
+	
+	
+	

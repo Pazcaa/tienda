@@ -1,19 +1,15 @@
-package com.ipartek.formacion.modelo.pojo;
+package com.ipartek.formacion.modelo;
 
-public class Rol {
-	
+public class Fabricante {
+
 	private int id;
 	private String nombre;
 	
-	public Rol() {
+	public Fabricante() {
 		super();
-		this.id = 1;
+		this.id = 0;
 		this.nombre = "";
-	}
-	
-	public Rol( int id ) {
-		this();
-		this.id = id;		
+		
 	}
 
 	public int getId() {
@@ -34,8 +30,10 @@ public class Rol {
 
 	@Override
 	public String toString() {
-		return "Rol [id=" + id + ", nombre=" + nombre + "]";
+		return "Fabricante [id=" + id + ", nombre=" + nombre + "]";
 	}
 	
-
+	
+	
+	
 }
