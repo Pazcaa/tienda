@@ -23,62 +23,62 @@
   
   <header>
   
-  <nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" href="#"> <i class=" logo fa fa-shopping-bag " aria-hidden="true"></i></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    
-    <!--Formulario Completo-->
-    <form class="form-inline my-2 my-lg-0" action="inicio" method= "get">
-    <div class="input-group">
-		<div class="input-group-prepend">				    
-		   <i class=" logo fa fa-search input-group-text" aria-hidden="true"></i>				    
-		</div>
-		   <input type="text" class="form-control form-name" name="nombre" value="${formulario.nombre}" placeholder="Nombre Producto" >
-	</div> 	
-		
-	 	<input class="form-control mr-sm-2" type="hidden" name="pmin" value ="${formulario.pmin }" placeholder="Precio Minimo">
-	 	<input class="form-control mr-sm-2" type="hidden" name="pmax" value ="${formulario.pmax }" placeholder="Precio Maximo">
-		 	
-		 	<!-- Button trigger modal -->
-			<button type="button" class="submit ${ ('0' eq formulario.pmin && '0' eq formulario.pmax) ? '' : 'active' }" data-toggle="modal" data-target="#exampleModal">
-			  Precio 
-			  min= ${ ('0' eq formulario.pmin ) ? '0' : formulario.pmin }€
-			  max= ${ ('0' eq formulario.pmax ) ? '0' : formulario.pmax }€
-			</button>
-		 	
-	 	<select class="form-control mr-sm-2 ${ ('0' eq formulario.idFabricante) ? '' : 'active' } custom-select" name="fabricante">
-	 		<option value="0">-- Seleccion Fabricante --</option>
-	 		<c:forEach items="${fabricantes }" var="fabricantes">
-	 		<option value="${fabricantes.id }" ${ (fabricantes.id eq formulario.idFabricante) ? "selected" : "" }> ${fabricantes.nombre }</option>
-	 		</c:forEach>
-	 	</select>
-	 	<br>
-	 	<input class="submit ${ ('' eq formulario.nombre && '0' eq formulario.idFabricante) ? '' : 'active' }" type="submit" value="Buscar">
- 	</form>
- 	
- 	
- 	 <!--Formulario Reset-->
- 	<form class="form-inline my-2 my-lg-0" action="inicio" method= "get">
-	 	<input type="hidden" name="nombre" value ="" placeholder="Nombre Producto">
-	 	<br>
-	 	<input type="hidden" name="pmin" value ="0" placeholder="Precio Minimo">
-	 	<br>
-	 	<input type="hidden" name="pmax" value ="0" placeholder="Precio Maximo">
-	 	<br>
-	 	<input type="hidden" name="fabricante" value ="0" >
-	 	<br>
-	 	<input class="submit ${ ('' eq formulario.nombre && '0' eq formulario.idFabricante && '0' eq formulario.pmin && '0' eq formulario.pmax) ? 'active' : '' }" type="submit" value="Limpiar">
+	  <nav class="navbar navbar-expand-lg navbar-light">
+	  <a class="navbar-brand" href="#"> <i class=" logo fa fa-shopping-bag " aria-hidden="true"></i></a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    
+	    <!--Formulario Completo-->
+	    <form class="form-inline my-2 my-lg-0" action="inicio" method= "get">
+	    <div class="input-group">
+			<div class="input-group-prepend">				    
+			   <i class=" logo fa fa-search input-group-text" aria-hidden="true"></i>				    
+			</div>
+			   <input type="text" class="form-control form-name" name="nombre" value="${formulario.nombre}" placeholder="Nombre Producto" >
+		</div> 	
+			
+		 	<input class="form-control mr-sm-2" type="hidden" name="pmin" value ="${formulario.pmin }" placeholder="Precio Minimo">
+		 	<input class="form-control mr-sm-2" type="hidden" name="pmax" value ="${formulario.pmax }" placeholder="Precio Maximo">
+			 	
+			 	<!-- Button trigger modal -->
+				<button type="button" class="submit ${ ('0' eq formulario.pmin && '0' eq formulario.pmax) ? '' : 'active' }" data-toggle="modal" data-target="#exampleModal">
+				  Precio 
+				  min= ${ ('0' eq formulario.pmin ) ? '0' : formulario.pmin }€
+				  max= ${ ('0' eq formulario.pmax ) ? '0' : formulario.pmax }€
+				</button>
+			 	
+		 	<select class="form-control mr-sm-2 ${ ('0' eq formulario.idFabricante) ? '' : 'active' } custom-select" name="fabricante">
+		 		<option value="0">-- Seleccion Fabricante --</option>
+		 		<c:forEach items="${fabricantes }" var="fabricantes">
+		 		<option value="${fabricantes.id }" ${ (fabricantes.id eq formulario.idFabricante) ? "selected" : "" }> ${fabricantes.nombre }</option>
+		 		</c:forEach>
+		 	</select>
+		 	<br>
+		 	<input class="submit ${ ('' eq formulario.nombre && '0' eq formulario.idFabricante) ? '' : 'active' }" type="submit" value="Buscar">
+	 	</form>
 	 	
- 	</form>
-	 
-    
-  </div>
-</nav>
-
-</header>
+	 	
+	 	 <!--Formulario Reset-->
+	 	<form class="form-inline my-2 my-lg-0" action="inicio" method= "get">
+		 	<input type="hidden" name="nombre" value ="" placeholder="Nombre Producto">
+		 	<br>
+		 	<input type="hidden" name="pmin" value ="0" placeholder="Precio Minimo">
+		 	<br>
+		 	<input type="hidden" name="pmax" value ="0" placeholder="Precio Maximo">
+		 	<br>
+		 	<input type="hidden" name="fabricante" value ="0" >
+		 	<br>
+		 	<input class="submit ${ ('' eq formulario.nombre && '0' eq formulario.idFabricante && '0' eq formulario.pmin && '0' eq formulario.pmax) ? 'active' : '' }" type="submit" value="Limpiar">
+		 	
+	 	</form>
+		 
+	    
+	  </div>
+	</nav>
+	
+  </header>
   
   <main class="container">
  
